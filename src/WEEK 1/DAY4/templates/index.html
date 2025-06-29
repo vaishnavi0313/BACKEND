@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Simple Book Store!</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+    <div class="container">
+        <h1>Simple Book Store</h1>
+
+        {% if submitted %}
+            <h2>Thank You!</h2>
+            <p>Book was submitted successfully.</p>
+            <a href="{{ url_for('index') }}" class="button">Submit Another</a>
+        {% else %}
+            <form method="POST">
+                <input type="text" name="Title" placeholder="Book Name" required><br>
+                <input type="text" name="Author" placeholder="Author Name" required><br>
+                <textarea name="Content" placeholder="Book Content" required></textarea><br>
+                <button type="submit">Submit</button>
+            </form>
+        {% endif %}
+    </div>
+</body>
+</html>

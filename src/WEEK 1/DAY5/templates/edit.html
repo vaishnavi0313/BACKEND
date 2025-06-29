@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Edit Student</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+  <div class="container edit">
+    <h1>Edit Student</h1>
+
+    <form method="POST">
+        <label>Name:</label>
+        <input type="text" name="name" value="{{ student['name'] }}" required>
+
+        <label>Email:</label>
+        <input type="email" name="email" value="{{ student['email'] }}" required>
+
+        <label>Phone:</label>
+        <input type="text" name="phone" value="{{ student['phone'] }}" required>
+
+        <label>Course:</label>
+        <select name="course" required>
+            <option value="">--Select Course--</option>
+            <option value="Cyber Security" {% if student['course'] == 'Cyber Security' %}selected{% endif %}>Cyber Security</option>
+            <option value="Full Stack Development" {% if student['course'] == 'Full Stack Development' %}selected{% endif %}>Full Stack Development</option>
+            <option value="UI/UX" {% if student['course'] == 'UI/UX' %}selected{% endif %}>UI/UX</option>
+            <option value="Web Development" {% if student['course'] == 'Web Development' %}selected{% endif %}>Web Development</option>
+            <option value="AI/ML" {% if student['course'] == 'AI/ML' %}selected{% endif %}>AI/ML</option>
+        </select>
+
+        <button type="submit">Update</button>
+    </form>
+     <a href="/">Back to Home</a>
+</div>
+   
+</body>
+</html>

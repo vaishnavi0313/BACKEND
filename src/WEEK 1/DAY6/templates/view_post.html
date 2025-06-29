@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>View Post</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+    {% if post %}
+        <h1>{{ post[1] }}</h1>
+        <p>{{ post[2] }}</p>
+    {% else %}
+        <p>Post not found.</p>
+    {% endif %}
+    <a href="{{ url_for('index') }}">Back</a>
+</body>
+</html>
