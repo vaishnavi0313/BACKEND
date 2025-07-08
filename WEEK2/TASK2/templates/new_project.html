@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>New Project</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+    <h1>Create a New Project</h1>
+    <form method="POST" enctype="multipart/form-data">
+        Title: <input type="text" name="title" required><br><br>
+        Select User:
+        <select name="user_id" required>
+            {% for user in users %}
+                <option value="{{ user.id }}">{{ user.name }}</option>
+            {% endfor %}
+        </select><br><br>
+        Upload Image: <input type="file" name="image" required><br><br>
+        <input type="submit" value="Create Project">
+    </form>
+    <a href="/">Back to Home</a>
+</body>
+</html>
