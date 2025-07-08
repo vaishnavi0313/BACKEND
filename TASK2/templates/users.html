@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>All Users</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    <style>
+        .user-card {
+            background-color: #ffffff;
+            border: 1px solid #ddd;
+            padding: 20px;
+            margin-bottom: 20px;
+            border-radius: 10px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+        }
+
+        .project {
+            margin-left: 20px;
+            padding: 10px 0;
+            border-bottom: 1px solid #eee;
+        }
+
+        .project img {
+            margin-top: 5px;
+            border-radius: 6px;
+            max-width: 120px;
+        }
+
+        .delete-form {
+            display: inline;
+        }
+
+        .delete-button {
+            background-color: #e74c3c;
+            color: white;
+            border: none;
+            padding: 5px 10px;
+            margin-top: 10px;
+            cursor: pointer;
+            border-radius: 5px;
+        }
+
+        .delete-button:hover {
+            background-color: #c0392b;
+        }
+
+        .back-link {
+            display: inline-block;
+            margin-bottom: 20px;
+            color: #3498db;
+        }
+
+        h1 {
+            margin-bottom: 10px;
+        }
+    </style>
+</head>
+<body>
+    <h1>All Users and Their Projects</h1>
+    <a href="{{ url_for('index') }}" class="back-link">← Back to Home</a>
+    <hr>
+
+    {% for user in users %}
+        <div class="user-card">
+            <h2>{{ user.name }} <small>(User ID: {{ user.id }})</small></h2>
+
+            <form method="POST" action="{{ url_for('delete_user', user_id=user.id) }}" class="delete-form" onsubmit="return confirm('Are you sure you want to delete this user and all their projects?')">
+                <input type="submit" value="Delete User" class="delete-button">
+            </form>
+
+            <h3>Projects:</h3>
+            {% if user.projects %}
+                {% for p in user.projects %}
+                    <div class="project">
+                        <strong>{{ p.title }}</strong>
+                        {% if p.image %}
+                            <br><img src="{{ url_for('static', filename='uploads/' + p.image) }}" alt="{{ p.title }}">
+                        {% endif %}
+
+                        <form method="POST" action="{{ url_for('delete_project', project_id=p.id) }}" class="delete-form" onsubmit="return confirm('Delete this project?')">
+                            <input type="submit" value="Delete Project" class="delete-button">
+                        </form>
+                    </div>
+                {% endfor %}
+            {% else %}
+                <p>No projects yet.</p>
+            {% endif %}
+        </div>
+    {% endfor %}
+</body>
+</html>
