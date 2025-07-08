@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Add Post</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+    <h1>Add New Blog Post</h1>
+    <form method="POST">
+        <input type="text" name="title" placeholder="Title" required><br><br>
+        <textarea name="content" placeholder="Content" rows="6" required></textarea><br><br>
+        <button type="submit">Submit</button>
+    </form>
+    <a href="{{ url_for('index') }}">Back to Home</a>
+</body>
+</html>
